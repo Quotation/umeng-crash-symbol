@@ -3,7 +3,7 @@ Umeng Crash Symbolicator
 
 一键把友盟iOS崩溃日志里的?????转成可见的symbol。
 
-[友盟](http://www.umeng.com/)的iOS应用错误分析工具收集到的Stack Trace，有些情况下无法显示出正确的symbol，显示为一堆问号?????。
+[友盟](http://www.umeng.com/)的iOS应用错误分析工具收集到的崩溃日志（Stack Trace），有些情况下无法显示出正确的symbol，显示为一堆问号?????。
 使用此工具可以在浏览器中一键把问号转换成symbol和代码位置。
 
 
@@ -32,6 +32,16 @@ Umeng Crash Symbolicator
 
 4. 在使用友盟的错误分析工具页面时，点击书签栏里的`Umeng Crash Symbolicator`即可把问号转换成symbol。
 
+
+原理
+--
+
+友盟的崩溃日志中记录了`dSYM UDID`，通过UDID查询到该条崩溃日志对应的App版本。[[参考1]][ref1]
+再取Stack Trace里问号前面的地址，结合`Slide Address`和`Base Address`，使用`atos`命令查出symbol。[[参考2]][ref2] [[参考3]][ref3]
+
+[ref1]: http://draftdog.blogspot.com/2012/04/figuring-out-uuid-for-dsym.html
+[ref2]: http://stackoverflow.com/questions/1460892/symbolicating-iphone-app-crash-reports
+[ref3]: http://stackoverflow.com/questions/13574933/ios-crash-reports-atos-not-working-as-expected/13576028#13576028
 
 示例
 --
