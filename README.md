@@ -10,20 +10,23 @@ Umeng Crash Symbolicator
 使用方法
 --
 
-1. 把不同版本的App Bundle和对应的dSYM放到symbols目录下。目录结构如下：
+1. 把不同版本的App Bundle和对应的dSYM放到`symbols`目录下。目录结构如下：
 
-    + symbols
-        + DemoApp-1.0
-            - DemoApp.app
-            - DemoApp.app.dSYM
-        + DemoApp-1.1
-            - DemoApp.app
-            - DemoApp.app.dSYM
+        + symbols
+            + DemoApp-1.0
+                - DemoApp.app
+                - DemoApp.app.dSYM
+            + DemoApp-1.1
+                - DemoApp.app
+                - DemoApp.app.dSYM
 
 2. 启动服务。地址和端口可以自定义：
-    python symbol_server.py localhost 8000
-启动成功后显示
-    Server started - http://localhost:8000
+
+        python symbol_server.py localhost 8000
+    
+   启动成功后显示
+
+        Server started - http://localhost:8000
 
 3. 用浏览器里访问上一步提示的地址，把链接`Umeng Crash Symbolicator`拖到书签栏上。
 
