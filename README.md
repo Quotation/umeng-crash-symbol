@@ -10,8 +10,9 @@ Umeng Crash Symbolicator
 运行环境
 --
 
-Python 2.7（其他版本没试过）；
-安装[Tornado Web Server](http://www.tornadoweb.org)；
+1. Python 2.7（其他版本没试过）
+
+2. 安装[Tornado Web Server](http://www.tornadoweb.org)
 
 
 使用方法
