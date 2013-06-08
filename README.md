@@ -7,6 +7,13 @@ Umeng Crash Symbolicator
 使用此工具可以在浏览器中一键把问号转换成symbol和代码位置。
 
 
+运行环境
+--
+
+Python 2.7（其他版本没试过）；
+安装[Tornado Web Server](http://www.tornadoweb.org)；
+
+
 使用方法
 --
 
@@ -19,7 +26,11 @@ Umeng Crash Symbolicator
             + DemoApp-1.1
                 - DemoApp.app
                 - DemoApp.app.dSYM
-
+	
+	这些App Bundle和dSYM必须是提交App Store的版本，一般可以从XCode的Archives里找到。
+	在Orgnizer - Archives里右键单击一个archive，选择Show in Finder，
+	在`*.xcarchive`上右键单击，选择Show Package Contents，把目录下的*.app和*.dSYM拷到同一目录中即可。
+	
 2. 启动服务。地址和端口可以自定义：
 
         python symbol_server.py localhost 8000
