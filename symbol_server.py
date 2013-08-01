@@ -72,15 +72,30 @@ def getSymbol(dsymUDID, address, slide, baseAddr, arch):
 # Slide Address: 0x00001000
 # Binary Image: ????
 # Base Address: 0x00067000
+#
+# - or like this -
+#
+# 	5   AppBinaryImage                        0x4d1841 _ZN6GBIter7AdvanceEjPb + 36
+#	6   AppBinaryImage                        0x2bb1d1 _ZNSt6vectorIcSaIcEE13_M_assign + 1648
+
 def convertUmengCrashReport(report):
     dsymUDID = re.search(r"dSYM UUID:\s*(.+)\s*", report).group(1)
     arch = re.search(r"CPU Type:\s*(.+)\s*", report).group(1)
     slide = re.search(r"Slide Address:\s*(.+)\s*", report).group(1)
     baseAddr = re.search(r"Base Address:\s*(.+)\s*", report).group(1)
-    def replaceUnknownSymbol(match):
+    imageName = re.search(r"Binary Image:\s*(.+)\s*", report).group(1)
+    
+    def replaceUnknownSymbol_Question(match):
         addr = match.group(2)
         return match.group(1) + getSymbol(dsymUDID, addr, slide, baseAddr, arch)
-    return re.sub(r"((0x.+)\s+)(\?+|_mh_execute_header).*", replaceUnknownSymbol, report)
+    
+    def replaceUnknownSymbol_Normal(match):
+        addr = match.group(2)
+        return match.group(1) + getSymbol(dsymUDID, addr, '0', '0', arch)
+    
+    report = re.sub(r"((0x.+)\s+)(\?+|_mh_execute_header).*", replaceUnknownSymbol_Question, report)
+    report = re.sub(r"(" + imageName + r"\s+(0x.+?)\s+).*", replaceUnknownSymbol_Normal, report)
+    return report
 
 
 class MainHandler(tornado.web.RequestHandler):

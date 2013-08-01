@@ -9,5 +9,11 @@ pip-log.txt
 # Translations
 *.mo
 
+# OS generated files
+.DS_Store
+.DS_Store?
+.Trashes
+Thumbs.db
+
 # Symbols
 symbols
