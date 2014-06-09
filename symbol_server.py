@@ -49,7 +49,7 @@ def getSymbol(dsymUDID, address, slide, baseAddr, arch):
     executable = getAppExecutable(app)
     realAddr = hex(int(address, 16) + int(slide, 16) - int(baseAddr, 16))
     os.chdir(dir)
-    cmd = "atos -arch %s -o '%s'/'%s' %s" % (arch, app.decode("utf-8"), executable, realAddr)
+    cmd = "xcrun atos -arch %s -o '%s'/'%s' %s" % (arch, app.decode("utf-8"), executable, realAddr)
     output = subprocess.check_output(cmd, shell=True)
     output = re.sub(r"\(in .+?\)\s", "", output).strip()
     return output
